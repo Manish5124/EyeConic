@@ -1,0 +1,37 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body[data-theme='light'] {
+  --bg: #ffffff;
+  --text: #111827;
+  --menu-bg: #f9fafb;
+  --submenu-bg: #e5e7eb;
+}
+
+body[data-theme='dark'] {
+  --bg: #0f172a;
+  --text: #f1f5f9;
+  --menu-bg: #1e293b;
+  --submenu-bg: #334155;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s ease;
+}
