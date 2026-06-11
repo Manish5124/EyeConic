@@ -1,11 +1,10 @@
 'use client';
 import { Mail, Phone, MapPin, Clock, MessageSquare, Send } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
 
 export default function ContactUs() {
-  const sectionRef = useRef(null);
-  const [visible, setVisible] = useState(false);
-  const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -16,18 +15,74 @@ export default function ContactUs() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = (e) => {
+    const sectionRef = useRef(null);
+
+  const [visible, setVisible] = useState(false);
+
+  const [formState, setFormState] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.15 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Thank you, ${formState.name}! We will get back to you shortly.`);
-    setFormState({ name: '', email: '', subject: '', message: '' });
+    console.log('Form Data:', formState); // Debug log
+    try {
+      setLoading(true);
+
+      await emailjs.send(
+        'service_8hf4nl5',
+        'template_j76wkxx',
+        {
+          name: formState.name,
+          email: formState.email,
+          subject: formState.subject,
+          message: formState.message,
+        },
+        't2DcWm914zIwkQstI'
+      );
+
+      alert('Message sent successfully!');
+
+      setFormState({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+      });
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      alert('Failed to send message. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
+
+  
   return (
     <section className={`contact-section ${visible ? 'visible' : ''}`} ref={sectionRef} id="contact-us">
       <div className="container">
         <div className="section-header">
           <span className="section-label">GET IN TOUCH</span>
-          <h2 className="title">We\'d Love to <strong>Hear From You</strong></h2>
+          <h2 className="title">We'd Love to <strong>Hear From You</strong></h2>
           <p className="subtitle">Have questions about our frames, shipping, or need style advice? Reach out to our team.</p>
         </div>
 
@@ -38,8 +93,8 @@ export default function ContactUs() {
               <div className="icon-wrap"><Phone size={20} /></div>
               <div className="info-text">
                 <h3>Call Customer Care</h3>
-                <p className="val">1800-123-4567</p>
-                <p className="sub">Mon-Sat: 9:00 AM - 6:00 PM</p>
+                <p className="val">+91 8516820039</p>
+                <p className="sub">Mon-Sun: 9:00 AM - 9:00 PM</p>
               </div>
             </div>
 
@@ -47,7 +102,7 @@ export default function ContactUs() {
               <div className="icon-wrap"><Mail size={20} /></div>
               <div className="info-text">
                 <h3>Email Us</h3>
-                <p className="val">support@theeyeconic.com</p>
+                <p className="val">theeyeconic00@gmail.com</p>
                 <p className="sub">We respond within 24 business hours</p>
               </div>
             </div>
@@ -56,8 +111,16 @@ export default function ContactUs() {
               <div className="icon-wrap"><MapPin size={20} /></div>
               <div className="info-text">
                 <h3>Visit Flagship Store</h3>
-                <p className="val">100 Feet Rd, Indiranagar</p>
-                <p className="sub">Bengaluru, Karnataka 560038</p>
+                <div>
+                  <div>
+                    <p className="val">Shop no 4, NFC</p>
+                <p className="sub">Bhawarkua ustad marg, Indore 452001</p>
+                  </div>
+                  <div>
+                    <p className="val">Shop no 3, Aayushi Apartment,</p>
+                <p className="sub">Geeta Bhawan, Indore 452001</p>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -65,74 +128,112 @@ export default function ContactUs() {
               <div className="icon-wrap"><Clock size={20} /></div>
               <div className="info-text">
                 <h3>Store Hours</h3>
-                <p className="val">Daily: 11:00 AM - 9:00 PM</p>
+                <p className="val">Daily: 10:30 AM - 10:00 PM</p>
                 <p className="sub">Eye test appointments available daily</p>
               </div>
             </div>
           </div>
 
           {/* Right: Message Form */}
-          <div className="contact-form-wrap">
-            <div className="form-header">
-              <MessageSquare size={20} className="header-icon" />
-              <h3>Send a Direct Message</h3>
+         <section
+      className={`contact-section ${visible ? 'visible' : ''}`}
+      ref={sectionRef}
+      id="contact-us"
+    >
+      <div className="container">
+        {/* Your existing JSX remains unchanged */}
+
+        <div className="contact-form-wrap">
+          <div className="form-header">
+            <MessageSquare size={20} className="header-icon" />
+            <h3>Send a Direct Message</h3>
+          </div>
+
+          <form onSubmit={handleSubmit} className="contact-form">
+            <div className="form-group">
+              <label htmlFor="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                value={formState.name}
+                onChange={(e) =>
+                  setFormState({
+                    ...formState,
+                    name: e.target.value,
+                  })
+                }
+                placeholder="John Doe"
+                required
+              />
             </div>
 
-            <form onSubmit={handleSubmit} className="contact-form">
-              <div className="form-group">
-                <label htmlFor="name">Full Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  value={formState.name}
-                  onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                  placeholder="John Doe"
-                  required
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                value={formState.email}
+                onChange={(e) =>
+                  setFormState({
+                    ...formState,
+                    email: e.target.value,
+                  })
+                }
+                placeholder="john@example.com"
+                required
+              />
+            </div>
 
-              <div className="form-group">
-                <label htmlFor="email">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  value={formState.email}
-                  onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                  placeholder="john@example.com"
-                  required
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="subject">Subject</label>
+              <input
+                type="text"
+                id="subject"
+                value={formState.subject}
+                onChange={(e) =>
+                  setFormState({
+                    ...formState,
+                    subject: e.target.value,
+                  })
+                }
+                placeholder="Frame fit query, warranty, etc."
+                required
+              />
+            </div>
 
-              <div className="form-group">
-                <label htmlFor="subject">Subject</label>
-                <input
-                  type="text"
-                  id="subject"
-                  value={formState.subject}
-                  onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
-                  placeholder="Frame fit query, warranty, etc."
-                  required
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="message">Your Message</label>
+              <textarea
+                id="message"
+                rows={4}
+                value={formState.message}
+                onChange={(e) =>
+                  setFormState({
+                    ...formState,
+                    message: e.target.value,
+                  })
+                }
+                placeholder="Type your message here..."
+                required
+              />
+            </div>
 
-              <div className="form-group">
-                <label htmlFor="message">Your Message</label>
-                <textarea
-                  id="message"
-                  rows={4}
-                  value={formState.message}
-                  onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                  placeholder="Type your message here..."
-                  required
-                />
-              </div>
+            <button
+              type="submit"
+              className="submit-btn"
+              disabled={loading}
+            >
+              <span>
+                {loading ? 'Sending...' : 'Send Message'}
+              </span>
+              <Send size={14} />
+            </button>
+          </form>
+        </div>
+      </div>
 
-              <button type="submit" className="submit-btn">
-                <span>Send Message</span>
-                <Send size={14} />
-              </button>
-            </form>
-          </div>
+      {/* Keep your existing styles here */}
+    </section>
         </div>
       </div>
 

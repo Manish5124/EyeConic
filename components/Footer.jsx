@@ -88,9 +88,9 @@ export default function Footer() {
           <div className="footer-links-col">
             <h3>Shop Eyewear</h3>
             <ul>
-              <li><Link href="/">Men\'s Eyeglasses</Link></li>
-              <li><Link href="/">Women\'s Eyeglasses</Link></li>
-              <li><Link href="/">Kids\' Eyeglasses</Link></li>
+              <li><Link href="/">Men's Eyeglasses</Link></li>
+              <li><Link href="/">Women's Eyeglasses</Link></li>
+              <li><Link href="/">Kids' Eyeglasses</Link></li>
               <li><Link href="/">Polarized Sunglasses</Link></li>
               <li><Link href="/">New Arrivals</Link></li>
             </ul>
@@ -114,15 +114,19 @@ export default function Footer() {
             <ul className="contact-list">
               <li>
                 <MapPin size={18} className="contact-icon" />
-                <span>100 Feet Rd, Indiranagar, Bengaluru, KA 560038</span>
+                <span>Shop no 4, NFC, Bhawarkua ustad marg, Indore 452001</span>
+              </li>
+               <li>
+                <MapPin size={18} className="contact-icon" />
+                <span>Shop no 3, Aayushi Apartment, Geeta Bhawan, Indore 452001</span>
               </li>
               <li>
                 <Phone size={18} className="contact-icon" />
-                <span>1800-123-4567 (Mon-Sat, 9AM-6PM)</span>
+                <span>+91 8516820039 (Mon-Sat, 9AM-9PM)</span>
               </li>
               <li>
                 <Mail size={18} className="contact-icon" />
-                <span>support@theeyeconic.com</span>
+                <span>theeyeconic00@gmail.com</span>
               </li>
             </ul>
           </div>

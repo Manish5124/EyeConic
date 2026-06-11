@@ -48,9 +48,10 @@ export default function Header() {
         <div className="header-inner">
           {/* Left Nav */}
           <nav className="nav-left">
-            <Link href="/" className="nav-link">Eyeglasses</Link>
-            <Link href="/" className="nav-link">Sunglasses</Link>
-            <Link href="/" className="nav-link">Collections</Link>
+            <Link href="/products/men" className="nav-link">Men</Link>
+            <Link href="/products/women" className="nav-link">Women</Link>
+            <Link href="/products/kids" className="nav-link">Kids</Link>
+            <Link href="/products" className="nav-link">All Frames</Link>
           </nav>
 
           {/* Logo */}
@@ -137,10 +138,10 @@ export default function Header() {
             </div>
             {openMenu === 'eyeglasses' && (
               <div className="submenu">
-                <Link href="/" className="submenu-item">Men</Link>
-                <Link href="/" className="submenu-item">Women</Link>
-                <Link href="/" className="submenu-item">Kids</Link>
-                <Link href="/" className="submenu-item">View All</Link>
+                <Link href="/products/men" className="submenu-item" onClick={() => setIsOpen(false)}>Men</Link>
+                <Link href="/products/women" className="submenu-item" onClick={() => setIsOpen(false)}>Women</Link>
+                <Link href="/products/kids" className="submenu-item" onClick={() => setIsOpen(false)}>Kids</Link>
+                <Link href="/products" className="submenu-item" onClick={() => setIsOpen(false)}>View All</Link>
               </div>
             )}
 
@@ -151,10 +152,10 @@ export default function Header() {
             </div>
             {openMenu === 'sunglasses' && (
               <div className="submenu">
-                <Link href="/" className="submenu-item">Men</Link>
-                <Link href="/" className="submenu-item">Women</Link>
-                <Link href="/" className="submenu-item">Polarized</Link>
-                <Link href="/" className="submenu-item">View All</Link>
+                <Link href="/products/men" className="submenu-item" onClick={() => setIsOpen(false)}>Men</Link>
+                <Link href="/products/women" className="submenu-item" onClick={() => setIsOpen(false)}>Women</Link>
+                <Link href="/products" className="submenu-item" onClick={() => setIsOpen(false)}>Polarized</Link>
+                <Link href="/products" className="submenu-item" onClick={() => setIsOpen(false)}>View All</Link>
               </div>
             )}
 
@@ -165,17 +166,19 @@ export default function Header() {
             </div>
             {openMenu === 'categories' && (
               <div className="submenu">
-                <Link href="/" className="submenu-item">Round</Link>
-                <Link href="/" className="submenu-item">Rectangle</Link>
-                <Link href="/" className="submenu-item">Cat Eye</Link>
-                <Link href="/" className="submenu-item">Aviator</Link>
+                <Link href="/products?shape=round" className="submenu-item" onClick={() => setIsOpen(false)}>Round</Link>
+                <Link href="/products?shape=rectangle" className="submenu-item" onClick={() => setIsOpen(false)}>Rectangle</Link>
+                <Link href="/products?shape=cat-eye" className="submenu-item" onClick={() => setIsOpen(false)}>Cat Eye</Link>
+                <Link href="/products?shape=aviator" className="submenu-item" onClick={() => setIsOpen(false)}>Aviator</Link>
+                <Link href="/products?shape=square" className="submenu-item" onClick={() => setIsOpen(false)}>Square</Link>
+                <Link href="/products?shape=oval" className="submenu-item" onClick={() => setIsOpen(false)}>Oval</Link>
               </div>
             )}
 
-            <Link href="/" className="menu-item">NEW ARRIVALS</Link>
-            <Link href="/" className="menu-item">BEST SELLERS</Link>
-            <Link href="/about" className="menu-item">ABOUT US</Link>
-            <Link href="/" className="menu-item">CONTACT</Link>
+            <Link href="/products" className="menu-item" onClick={() => setIsOpen(false)}>NEW ARRIVALS</Link>
+            <Link href="/products" className="menu-item" onClick={() => setIsOpen(false)}>BEST SELLERS</Link>
+            <Link href="/about" className="menu-item" onClick={() => setIsOpen(false)}>ABOUT US</Link>
+            <Link href="/#contact" className="menu-item" onClick={() => setIsOpen(false)}>CONTACT</Link>
           </div>
         </div>
 
