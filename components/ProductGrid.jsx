@@ -1,11 +1,13 @@
 'use client';
 import { useRef, useEffect, useState } from 'react';
-import { Heart, ShoppingBag, Eye, ArrowRight } from 'lucide-react';
+import { Heart, ShoppingBag, Eye, ArrowRight, Check } from 'lucide-react';
+import { useCartWishlist } from '../context/CartWishlistContext';
+import Link from 'next/link';
 
 export default function ProductGrid() {
   const sectionRef = useRef(null);
   const [visible, setVisible] = useState(false);
-  const [likedProducts, setLikedProducts] = useState({});
+  const { toggleWishlist, isInWishlist, addToCart, isInCart } = useCartWishlist();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -16,9 +18,6 @@ export default function ProductGrid() {
     return () => observer.disconnect();
   }, []);
 
-  const toggleLike = (id) => {
-    setLikedProducts(prev => ({ ...prev, [id]: !prev[id] }));
-  };
 
   const products = [
     {
@@ -100,11 +99,11 @@ export default function ProductGrid() {
     },
     {
       id: 8,
-      name: 'Bolt | Sport Shield',
-      type: 'SHIELD / MEN',
-      img: 'https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=500&h=400&fit=crop',
-      price: '₹1,599',
-      oldPrice: '₹3,500',
+      name: 'Peter Jones',
+      type: 'SHIELD / Unisex',
+      img: '/frame/peter.png',
+      price: '₹526',
+      oldPrice: '₹1,100',
       discount: '-54%',
       badge: null,
       colors: ['#1a1a1a', '#0284c7', '#16a34a'],
@@ -143,11 +142,11 @@ export default function ProductGrid() {
 
                 {/* Wishlist */}
                 <button
-                  className={`wishlist-btn ${likedProducts[item.id] ? 'liked' : ''}`}
-                  onClick={() => toggleLike(item.id)}
+                  className={`wishlist-btn ${isInWishlist(item.id) ? 'liked' : ''}`}
+                  onClick={() => toggleWishlist(item)}
                   aria-label="Add to wishlist"
                 >
-                  <Heart size={16} strokeWidth={1.5} fill={likedProducts[item.id] ? '#e53e3e' : 'none'} />
+                  <Heart size={16} strokeWidth={1.5} fill={isInWishlist(item.id) ? '#e53e3e' : 'none'} />
                 </button>
 
                 {/* Hover Actions */}
@@ -156,10 +155,21 @@ export default function ProductGrid() {
                     <Eye size={16} strokeWidth={1.5} />
                     <span>Quick View</span>
                   </button>
-                  <button className="action-btn primary" aria-label="Add to cart">
-                    <ShoppingBag size={16} strokeWidth={1.5} />
-                    <span>Add to Cart</span>
-                  </button>
+                  {isInCart(item.id) ? (
+                    <Link href="/cart" className="action-btn in-cart" aria-label="Go to cart">
+                      <Check size={16} strokeWidth={1.5} />
+                      <span>In Cart</span>
+                    </Link>
+                  ) : (
+                    <button
+                      className="action-btn primary"
+                      aria-label="Add to cart"
+                      onClick={() => addToCart(item, item.colors ? item.colors[0] : null)}
+                    >
+                      <ShoppingBag size={16} strokeWidth={1.5} />
+                      <span>Add to Cart</span>
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -414,6 +424,18 @@ export default function ProductGrid() {
 
         .action-btn.primary:hover {
           background: var(--color-accent, #c9a96e);
+        }
+
+        .action-btn.in-cart {
+          background: #dcfce7;
+          color: #16a34a;
+          border-color: #86efac;
+          font-weight: 700;
+        }
+
+        .action-btn.in-cart:hover {
+          background: #bbf7d0;
+          transform: translateY(-2px);
         }
 
         /* ===== COLOR DOTS ===== */

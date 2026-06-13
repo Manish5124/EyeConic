@@ -2,14 +2,20 @@
 import React, { use } from 'react';
 import products from "../../../data/products";
 import Link from "next/link";
-import { ArrowLeft, ShoppingBag, Heart, Shield, RefreshCw, Truck } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, Shield, RefreshCw, Truck, Check } from 'lucide-react';
 import { useState } from 'react';
+import { useCartWishlist } from "../../../context/CartWishlistContext";
+
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
   const product = products.find(p => p.id === resolvedParams.id);
   const [selectedColor, setSelectedColor] = useState(product ? product.colors[0] : null);
-  const [liked, setLiked] = useState(false);
+  
+  const { toggleWishlist, isInWishlist, addToCart, isInCart } = useCartWishlist() as any;
+  const liked = product ? isInWishlist(product.id) : false;
+  const inCart = product ? isInCart(product.id, selectedColor) : false;
+
 
   if (!product) {
     return (
@@ -84,13 +90,20 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
             {/* Actions */}
             <div className="action-row">
-              <button className="add-to-cart-btn" onClick={() => alert('Added to cart!')}>
-                <ShoppingBag size={18} />
-                <span>Add to Cart</span>
-              </button>
+              {inCart ? (
+                <Link href="/cart" className="add-to-cart-btn in-cart-btn">
+                  <Check size={18} />
+                  <span>In Cart — View Bag</span>
+                </Link>
+              ) : (
+                <button className="add-to-cart-btn" onClick={() => addToCart(product, selectedColor)}>
+                  <ShoppingBag size={18} />
+                  <span>Add to Cart</span>
+                </button>
+              )}
               <button 
                 className={`wish-btn ${liked ? 'liked' : ''}`}
-                onClick={() => setLiked(!liked)}
+                onClick={() => toggleWishlist(product)}
                 aria-label="Add to wishlist"
               >
                 <Heart size={20} fill={liked ? '#e53e3e' : 'none'} />
@@ -312,6 +325,19 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
           background: var(--color-accent);
           transform: translateY(-2px);
           box-shadow: var(--shadow-lg);
+        }
+
+        .in-cart-btn {
+          background: #dcfce7;
+          color: #16a34a;
+          border: none;
+          text-decoration: none;
+        }
+
+        .in-cart-btn:hover {
+          background: #bbf7d0;
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-md);
         }
 
         .wish-btn {

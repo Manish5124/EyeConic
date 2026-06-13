@@ -1,10 +1,12 @@
 'use client';
 import Link from "next/link";
-import { Heart, ShoppingBag } from 'lucide-react';
-import { useState } from 'react';
+import { Heart, ShoppingBag, Check } from 'lucide-react';
+import { useCartWishlist } from "../context/CartWishlistContext";
 
 export default function ProductCard({ product }) {
-  const [liked, setLiked] = useState(false);
+  const { toggleWishlist, isInWishlist, addToCart, isInCart } = useCartWishlist();
+  const liked = isInWishlist(product.id);
+  const inCart = isInCart(product.id);
 
   return (
     <div className="product-card">
@@ -19,7 +21,7 @@ export default function ProductCard({ product }) {
           className={`wishlist-btn ${liked ? 'liked' : ''}`}
           onClick={(e) => {
             e.preventDefault();
-            setLiked(!liked);
+            toggleWishlist(product);
           }}
           aria-label="Add to wishlist"
         >
@@ -30,12 +32,18 @@ export default function ProductCard({ product }) {
           <Link href={`/products/${product.id}`} className="action-btn">
             View Details
           </Link>
-          <button className="action-btn primary" onClick={(e) => {
-            e.preventDefault();
-            alert('Added to cart!');
-          }}>
-            <ShoppingBag size={14} /> Add
-          </button>
+          {inCart ? (
+            <Link href="/cart" className="action-btn in-cart">
+              <Check size={14} /> In Cart
+            </Link>
+          ) : (
+            <button className="action-btn primary" onClick={(e) => {
+              e.preventDefault();
+              addToCart(product, product.colors ? product.colors[0] : null);
+            }}>
+              <ShoppingBag size={14} /> Add
+            </button>
+          )}
         </div>
       </div>
 
@@ -170,6 +178,18 @@ export default function ProductCard({ product }) {
 
         .action-btn.primary:hover {
           background: var(--color-accent, #c9a96e);
+        }
+
+        .action-btn.in-cart {
+          background: #dcfce7;
+          color: #16a34a;
+          border-color: #86efac;
+          font-weight: 700;
+        }
+
+        .action-btn.in-cart:hover {
+          background: #bbf7d0;
+          transform: translateY(-2px);
         }
 
         .card-info {

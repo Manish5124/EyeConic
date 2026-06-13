@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, Search, Sun, X, ChevronDown, Moon, ShoppingBag, Heart, User } from "lucide-react";
+import { useCartWishlist } from '../context/CartWishlistContext';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,6 +10,16 @@ export default function Header() {
   const [theme, setTheme] = useState("light");
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  
+  const { cart, wishlist } = useCartWishlist();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const cartCount = cart ? cart.reduce((total, item) => total + item.quantity, 0) : 0;
+
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);
@@ -71,14 +82,17 @@ export default function Header() {
               {theme === "light" ? <Moon size={20} strokeWidth={1.5} /> : <Sun size={20} strokeWidth={1.5} />}
             </button>
 
-            <button className="icon-btn" aria-label="Wishlist">
+            <Link href="/wishlist" className="icon-btn" aria-label="Wishlist">
               <Heart size={20} strokeWidth={1.5} />
-            </button>
+              {mounted && wishlist.length > 0 && (
+                <span className="wishlist-count">{wishlist.length}</span>
+              )}
+            </Link>
 
-            <button className="icon-btn cart-btn" aria-label="Cart">
+            <Link href="/cart" className="icon-btn cart-btn" aria-label="Cart">
               <ShoppingBag size={20} strokeWidth={1.5} />
-              <span className="cart-count">0</span>
-            </button>
+              <span className="cart-count">{mounted ? cartCount : 0}</span>
+            </Link>
 
             <button className="icon-btn mobile-menu-btn" onClick={() => setIsOpen(true)} aria-label="Menu">
               <Menu size={22} strokeWidth={1.5} />
@@ -324,6 +338,22 @@ export default function Header() {
           top: 2px;
           right: 2px;
           background: var(--color-accent, #c9a96e);
+          color: #fff;
+          font-size: 9px;
+          font-weight: 700;
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .wishlist-count {
+          position: absolute;
+          top: 2px;
+          right: 2px;
+          background: var(--color-danger, #e53e3e);
           color: #fff;
           font-size: 9px;
           font-weight: 700;
