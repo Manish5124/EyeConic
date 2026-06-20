@@ -253,89 +253,7 @@ Thank you for shopping with us!`;
               <div className="phonepe-inner">
                 <div className="phonepe-left">
                   <div className="phonepe-qr-wrap">
-                    {/* SVG QR Code Simulation */}
-                    <svg viewBox="0 0 200 200" className="qr-svg" xmlns="http://www.w3.org/2000/svg">
-                      <rect width="200" height="200" fill="white" rx="12"/>
-                      {/* Finder patterns */}
-                      <rect x="10" y="10" width="60" height="60" fill="none" stroke="#5f259f" strokeWidth="6" rx="4"/>
-                      <rect x="20" y="20" width="40" height="40" fill="#5f259f" rx="2"/>
-                      <rect x="28" y="28" width="24" height="24" fill="white" rx="1"/>
-                      <rect x="32" y="32" width="16" height="16" fill="#5f259f" rx="1"/>
-
-                      <rect x="130" y="10" width="60" height="60" fill="none" stroke="#5f259f" strokeWidth="6" rx="4"/>
-                      <rect x="140" y="20" width="40" height="40" fill="#5f259f" rx="2"/>
-                      <rect x="148" y="28" width="24" height="24" fill="white" rx="1"/>
-                      <rect x="152" y="32" width="16" height="16" fill="#5f259f" rx="1"/>
-
-                      <rect x="10" y="130" width="60" height="60" fill="none" stroke="#5f259f" strokeWidth="6" rx="4"/>
-                      <rect x="20" y="140" width="40" height="40" fill="#5f259f" rx="2"/>
-                      <rect x="28" y="148" width="24" height="24" fill="white" rx="1"/>
-                      <rect x="32" y="152" width="16" height="16" fill="#5f259f" rx="1"/>
-
-                      {/* Data modules (decorative) */}
-                      <rect x="80" y="10" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="92" y="10" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="104" y="10" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="116" y="10" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="80" y="22" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="104" y="22" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="80" y="34" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="92" y="34" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="80" y="46" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="104" y="46" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="80" y="58" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="92" y="58" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="116" y="58" width="8" height="8" fill="#5f259f" rx="1"/>
-
-                      <rect x="10" y="80" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="22" y="80" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="46" y="80" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="58" y="80" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="80" y="80" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="92" y="80" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="116" y="80" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="140" y="80" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="164" y="80" width="8" height="8" fill="#5f259f" rx="1"/>
-
-                      <rect x="10" y="92" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="34" y="92" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="58" y="92" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="80" y="92" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="104" y="92" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="128" y="92" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="152" y="92" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="176" y="92" width="8" height="8" fill="#5f259f" rx="1"/>
-
-                      <rect x="10" y="104" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="22" y="104" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="46" y="104" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="68" y="104" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="92" y="104" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="116" y="104" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="140" y="104" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="164" y="104" width="8" height="8" fill="#5f259f" rx="1"/>
-
-                      <rect x="80" y="140" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="92" y="140" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="116" y="140" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="128" y="140" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="152" y="140" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="164" y="140" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="80" y="152" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="104" y="152" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="128" y="152" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="152" y="152" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="80" y="164" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="92" y="164" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="116" y="164" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="140" y="164" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="164" y="164" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="80" y="176" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="104" y="176" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="128" y="176" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="152" y="176" width="8" height="8" fill="#5f259f" rx="1"/>
-                      <rect x="176" y="176" width="8" height="8" fill="#5f259f" rx="1"/>
-                    </svg>
+                    <img src="/phonepe-qr.jpg" alt="PhonePe QR Code" className="qr-img" />
                   </div>
                   <div className="phonepe-brand">
                     <span className="pp-logo">Ph</span><span className="pp-logo-blue">one</span><span className="pp-logo">Pe</span>
@@ -464,8 +382,8 @@ Thank you for shopping with us!`;
           .phonepe-card { background:linear-gradient(135deg,#f8f0ff 0%,#ede0fc 100%); border-color:#d6b8fc; }
           .phonepe-inner { display:flex; gap:28px; align-items:flex-start; }
           .phonepe-left { display:flex; flex-direction:column; align-items:center; gap:10px; flex-shrink:0; }
-          .phonepe-qr-wrap { width:160px; height:160px; border-radius:12px; overflow:hidden; box-shadow:0 4px 20px rgba(95,37,159,0.2); background:#fff; padding:4px; }
-          .qr-svg { width:100%; height:100%; }
+          .phonepe-qr-wrap { width:180px; height:auto; border-radius:12px; overflow:hidden; box-shadow:0 4px 20px rgba(95,37,159,0.2); background:#000; padding:0; }
+          .qr-img { width:100%; height:auto; display:block; }
           .phonepe-brand { font-size:18px; font-weight:700; letter-spacing:-0.5px; }
           .pp-logo { color:#5f259f; }
           .pp-logo-blue { color:#00aee4; }
